@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>請求書生成ツール</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>請求書生成ツール</h1>
+        
+        <div class="form-section">
+            <h2>基本情報</h2>
+            <div class="form-group">
+                <label>発行日:</label>
+                <input type="date" id="issueDate" required>
+            </div>
+            <div class="form-group">
+                <label>請求書番号:</label>
+                <div class="invoice-number-display">自動生成されます</div>
+            </div>
+            <div class="form-group">
+                <label>お客様名:</label>
+                <div class="client-name-group">
+                    <select id="clientCompanyType" class="company-type-select">
+                        <option value="">（法人種別を選択）</option>
+                        <option value="株式会社">株式会社</option>
+                        <option value="有限会社">有限会社</option>
+                        <option value="合同会社">合同会社</option>
+                        <option value="合資会社">合資会社</option>
+                        <option value="合名会社">合名会社</option>
+                        <option value="一般社団法人">一般社団法人</option>
+                        <option value="一般財団法人">一般財団法人</option>
+                        <option value="医療法人">医療法人</option>
+                        <option value="学校法人">学校法人</option>
+                        <option value="宗教法人">宗教法人</option>
+                        <option value="NPO法人">NPO法人</option>
+                        <option value="その他">その他</option>
+                    </select>
+                    <input type="text" id="clientName" placeholder="会社名・個人名" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>発行元:</label>
+                <div class="company-name-display">株式会社KASEKI CREATIVE</div>
+            </div>
+        </div>
+
+        <div class="form-section">
+            <h2>請求項目</h2>
+            <p class="section-note">各項目ごとに消費税率と金額の入力方法を設定できます</p>
+            <div id="itemsContainer">
+                <div class="item-row">
+                    <input type="date" class="item-date" id="firstItemDate" required>
+                    <input type="text" class="item-description" placeholder="項目名" required>
+                    <input type="number" class="item-amount" placeholder="金額" min="0" step="1" required>
+                    <select class="item-tax-rate">
+                        <option value="0">0%</option>
+                        <option value="8">8%</option>
+                        <option value="10" selected>10%</option>
+                    </select>
+                    <select class="item-amount-type">
+                        <option value="exclusive">税抜</option>
+                        <option value="inclusive" selected>税込</option>
+                    </select>
+                    <button type="button" class="remove-item-btn" onclick="removeItem(this)" style="display:none;">削除</button>
+                </div>
+            </div>
+            <button type="button" id="addItemBtn" onclick="addItem()">項目を追加</button>
+        </div>
+
+        <div class="form-section">
+            <button type="button" id="generateBtn" onclick="generateInvoice()">請求書を生成</button>
+            <button type="button" id="printBtn" onclick="saveInvoiceAsPDF()" style="display:none;">PDFとして保存</button>
+        </div>
+
+        <div class="form-section">
+            <h2>請求書履歴</h2>
+            <button type="button" id="toggleHistoryBtn" onclick="toggleHistorySection()">履歴を表示</button>
+            <div id="invoiceHistorySection" style="display:none;">
+                <div id="invoiceHistoryContainer"></div>
+            </div>
+        </div>
+
+        <div id="invoicePreview" style="display:none;"></div>
+        <div id="receiptPreview" style="display:none;"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
