@@ -1415,6 +1415,7 @@ function displayInvoiceHistory() {
                     <div class="history-item-actions">
                         <button class="history-btn view-btn" onclick="loadInvoiceFromHistory(${index})">表示</button>
                         <button class="history-btn pdf-btn" onclick="regeneratePDFFromHistory(${index})">PDF</button>
+                        <button class="history-btn receipt-btn" onclick="generateReceiptFromHistory(${index})">領収書を発行</button>
                         <button class="history-btn delete-btn" onclick="deleteInvoiceFromHistory(${index})">削除</button>
                     </div>
                 </div>
@@ -1574,6 +1575,34 @@ function deleteInvoiceFromHistory(index) {
     } catch (error) {
         console.error('履歴の削除に失敗しました:', error);
         alert('履歴の削除に失敗しました');
+    }
+}
+
+// 履歴から領収書を生成
+async function generateReceiptFromHistory(index) {
+    const history = getInvoiceHistory();
+    if (index < 0 || index >= history.length) {
+        alert('履歴が見つかりません');
+        return;
+    }
+    
+    const invoiceData = history[index];
+    
+    // currentInvoiceDataに設定（領収書生成に必要）
+    currentInvoiceData = invoiceData;
+    
+    // 領収書を生成
+    try {
+        await generateReceiptInternal();
+        
+        // 履歴セクションを閉じる
+        const historySection = document.getElementById('invoiceHistorySection');
+        if (historySection) {
+            historySection.style.display = 'none';
+        }
+    } catch (error) {
+        console.error('領収書の生成に失敗しました:', error);
+        alert('領収書の生成に失敗しました: ' + error.message);
     }
 }
 

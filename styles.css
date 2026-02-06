@@ -42,6 +42,36 @@ h2 {
     border-left: 4px solid #4CAF50;
 }
 
+.history-section {
+    background: #fff3e0;
+    border-left: 4px solid #FF9800;
+    border: 2px solid #FF9800;
+    box-shadow: 0 2px 8px rgba(255, 152, 0, 0.2);
+}
+
+.history-section h2 {
+    color: #E65100;
+    font-size: 1.8em;
+    margin-bottom: 15px;
+}
+
+.history-toggle-btn {
+    background: #FF9800;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-bottom: 15px;
+    transition: background-color 0.3s;
+}
+
+.history-toggle-btn:hover {
+    background: #F57C00;
+}
+
 .form-group {
     margin-bottom: 20px;
 }
@@ -560,6 +590,15 @@ h2 {
 
 .pdf-btn:hover {
     background: #F57C00;
+}
+
+.receipt-btn {
+    background: #2196F3;
+    color: white;
+}
+
+.receipt-btn:hover {
+    background: #1976D2;
 }
 
 .delete-btn {

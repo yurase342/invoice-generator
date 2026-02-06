@@ -11,6 +11,14 @@
     <div class="container">
         <h1>請求書生成ツール</h1>
         
+        <div class="form-section history-section">
+            <h2>📋 請求書履歴</h2>
+            <button type="button" id="toggleHistoryBtn" onclick="toggleHistorySection()" class="history-toggle-btn">履歴を表示/非表示</button>
+            <div id="invoiceHistorySection" style="display:block;">
+                <div id="invoiceHistoryContainer"></div>
+            </div>
+        </div>
+        
         <div class="form-section">
             <h2>基本情報</h2>
             <div class="form-group">
@@ -74,14 +82,6 @@
         <div class="form-section">
             <button type="button" id="generateBtn" onclick="generateInvoice()">請求書を生成</button>
             <button type="button" id="printBtn" onclick="saveInvoiceAsPDF()" style="display:none;">PDFとして保存</button>
-        </div>
-
-        <div class="form-section">
-            <h2>請求書履歴</h2>
-            <button type="button" id="toggleHistoryBtn" onclick="toggleHistorySection()">履歴を表示</button>
-            <div id="invoiceHistorySection" style="display:none;">
-                <div id="invoiceHistoryContainer"></div>
-            </div>
         </div>
 
         <div id="invoicePreview" style="display:none;"></div>
